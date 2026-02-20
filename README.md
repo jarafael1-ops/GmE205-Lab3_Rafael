@@ -23,3 +23,5 @@ By adding the method the parent class is like adding a new feature to a genetic 
 How does this hierarchical design make your spatial system more scalable 
 compared to defining each class independently?
 Hietarchy moves the complexity from quantity of code to quality of the design. It allowed the system to grow jorizontally more types of shapes and vertically more features with a fraction of the maintenace cost.
+# Reflection Challenge Excercise
+The validation logic inside __init__. From dictionary method simply cleans the data and passes it to the constructor, which acts as the ultimate gatekeeper.  
