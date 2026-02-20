@@ -47,5 +47,31 @@ class Parcel(SpatialObject):
         self.parcel_id = parcel_id 
         self.attributes = attributes if attributes is not None else {}
 
-     
- 
+from shapely.geometry import Point as ShapelyPoint
+
+class SpatialObject:
+    def __init__(self, geometry):
+        self.geometry = geometry
+    
+    def bbox(self):
+        return self.geometry.bounds
+
+class Point(SpatialObject):
+    def __init__(self, id, lon, lat, name=None, tag=None):
+        if not (-180 <= lon <= 180): raise ValueError("Invalid Longitude")
+        if not (-90 <= lat <= 90): raise ValueError("Invalid Latitude")
+        
+        super().__init__(ShapelyPoint(lon, lat))
+        self.id = id
+        self.name = name
+        self.tag = tag
+
+    @classmethod 
+    def from_dict(cls, d: dict):
+        # Your logic here...
+        return cls(d["id"], d["lon"], d["lat"], d.get("name"), d.get("tag"))
+
+    def to_tuple(self):
+        return (self.geometry.x, self.geometry.y)
+    
+    
